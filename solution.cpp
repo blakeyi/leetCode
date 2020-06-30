@@ -3,14 +3,14 @@ using namespace std;
  struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}//¹¹Ôìº¯Êı
+    ListNode(int x) : val(x), next(NULL) {}//??????
 };
  
 class Solution_add {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* head = new ListNode(0);//Í·½áµã
-        ListNode* L = head;//ÒÆ¶¯Ö¸Õë
+        ListNode* head = new ListNode(0);//????
+        ListNode* L = head;//??????
         int val1 = 0, val2 = 0, c = 0;
         while (l1 != NULL || l2 != NULL)
         {
@@ -44,7 +44,7 @@ public:
         int start = 0, end = 0;
         memset(flag, -1, sizeof(int)*256);
         for (int i = 0; i < s.length(); i++) {
-            if (flag[s[i]] != -1&& flag[s[i]]>=start) {//Ã»ÓĞÏàÍ¬ÔªËØ
+            if (flag[s[i]] != -1&& flag[s[i]]>=start) {//?????????
                 start = flag[s[i]] + 1;
                 len = end - start;
             }
@@ -66,18 +66,18 @@ public:
             int m = le + (ri - le) / 2;
             if (nums2[k - m - 1] > nums1[m]) le = m + 1;
             else ri = m;
-        }//Ñ­»·½áÊøÊ±µÄÎ»ÖÃle¼´ÎªËùÇóÎ»ÖÃ£¬µÚkĞ¡¼´Îªmax(nums1[le-1]),nums2[k-le-1])£¬µ«ÊÇÓÉÓÚle¿ÉÒÔÎª0¡¢k,ËùÒÔ
-        //le-1»òÕßk-le-1¿ÉÄÜ²»´æÔÚËùÒÔÏÂÃæµ¥¶ÀÅĞ¶ÏÏÂ
+        }//??????????Î»??le???????Î»?????kĞ¡???max(nums1[le-1]),nums2[k-le-1])??????????le?????0??k,????
+        //le-1????k-le-1????????????????æµ¥???Ğ¶???
         int nums1LeftMax = le == 0 ? INT_MIN : nums1[le - 1];
         int nums2LeftMax = le == k ? INT_MIN : nums2[k - le - 1];
         return max(nums1LeftMax, nums2LeftMax);
     }
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int n = nums1.size() + nums2.size();
-        if (n & 1) {//Á½¸öÊı×é³¤¶ÈºÍÎªÆæÊı
+        if (n & 1) {//???????é³¤????????
             return findKthElm(nums1, nums2, (n >> 1) + 1);
         }
-        else {//ÎªÅ¼Êı
+        else {//????
             return (findKthElm(nums1, nums2, n >> 1) + findKthElm(nums1, nums2, (n >> 1) + 1)) / 2.0;
         }
     }
@@ -93,35 +93,36 @@ public:
         int dx[] = { -1,  0,  1,  1, 1,  0, -1, -1 };
         int dy[] = { -1, -1, -1,  0, 1,  1, 1, 0 };
 
-        for (int i = 0; i < board.size(); i++) {//i´ú±íĞĞ
-            for (int j = 0; j < board[0].size(); j++) {//j´ú±íÁĞ
+        for (int i = 0; i < board.size(); i++) {//i??????
+            for (int j = 0; j < board[0].size(); j++) {//j??????
                 int sum = 0;
-                for (int k = 0; k < 8; k++) {//ÏÈ¼ÆËãÖÜÎ§Ï¸°ûÇé¿ö
+                for (int k = 0; k < 8; k++) {//???????Î§??????
                     int nx = i + dx[k];
                     int ny = j + dy[k];
                     if (nx >= 0 && nx < board.size() && ny >= 0 && ny < board[0].size()) {
-                        sum += (board[nx][ny] & 1); // Ö»ÀÛ¼Ó×îµÍÎ»,ÒòÎªºóÃæ»á¸üĞÂµÚ¶ş¸öbitÎ»
+                        sum += (board[nx][ny] & 1); // ???????Î»,???????????????bitÎ»
                     }
                 }
                 if (board[i][j] == 1) {
                     if (sum == 2 || sum == 3) {
-                        board[i][j] |= 2;  // Ê¹ÓÃµÚ¶ş¸öbit±ê¼ÇÊÇ·ñ´æ»î
+                        board[i][j] |= 2;  // ???????bit????????
                     }
                 }
                 else {
                     if (sum == 3) {
-                        board[i][j] |= 2; // Ê¹ÓÃµÚ¶ş¸öbit±ê¼ÇÊÇ·ñ´æ»î
+                        board[i][j] |= 2; // ???????bit????????
                     }
                 }
             }
         }
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board[i].size(); j++) {
-                board[i][j] >>= 1; //ÓÒÒÆÒ»Î»£¬ÓÃµÚ¶şbit¸²¸ÇµÚÒ»¸öbit¡£
+                board[i][j] >>= 1; //?????Î»??????bit????????bit??
             }
         }
     }
 };
+
 
 
 int main()
