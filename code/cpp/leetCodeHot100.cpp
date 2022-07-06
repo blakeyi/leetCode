@@ -1,22 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right)
+    TreeNode(int x, TreeNode* left, TreeNode* right)
         : val(x), left(left), right(right) {}
 };
 
-struct ListNode {
+struct ListNode
+{
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
 // 层序遍历建树
@@ -26,13 +28,13 @@ struct ListNode {
    nl nl  nl nl
 nl 用INT_MAX代替
 */
-TreeNode *CreatTree(vector<int> nums) {
-    TreeNode *root = new TreeNode(nums[0]);
-    queue<TreeNode *> tQueue;
+TreeNode* CreatTree(vector<int> nums) {
+    TreeNode* root = new TreeNode(nums[0]);
+    queue<TreeNode*> tQueue;
     tQueue.push(root);
     int n = nums.size(), i = 1;
     while (!tQueue.empty() && i < n) {
-        TreeNode *p = tQueue.front();
+        TreeNode* p = tQueue.front();
         TreeNode *left, *right;
         tQueue.pop();
         if (nums[i] != INT_MAX) {
@@ -57,19 +59,20 @@ TreeNode *CreatTree(vector<int> nums) {
     return root;
 }
 
-ListNode *CreatList(vector<int> nums) {
-    ListNode *head = new ListNode(nums[0]);
-    ListNode *phead = head;
+ListNode* CreatList(vector<int> nums) {
+    ListNode* head = new ListNode(nums[0]);
+    ListNode* phead = head;
     for (int i = 1; i < nums.size(); ++i) {
-        ListNode *node = new ListNode(nums[i]);
+        ListNode* node = new ListNode(nums[i]);
         phead->next = node;
         phead = node;
     }
     return head;
 }
 
-class Solution695 {  // 695. 岛屿的最大面积
-   public:
+class Solution695
+{  // 695. 岛屿的最大面积
+  public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
         int maxArea = 0;
         vector<int> direction = {-1, 0, 1, 0, -1};
@@ -102,16 +105,17 @@ class Solution695 {  // 695. 岛屿的最大面积
         return maxArea;
     }
 };
-class Solution77 {
+class Solution77
+{
     /*
     利用递归，分别执行当前节点选与不选的状态，
     当temp数组的数量达到k，则存入答案
     */
-   public:
+  public:
     vector<int> temp;
     vector<vector<int>> ans;
 
-   public:
+  public:
     void dfs(int cur, int n, int k) {
         if (temp.size() + (n - cur + 1) < k) {
             return;
@@ -131,17 +135,19 @@ class Solution77 {
         return ans;
     }
 };
-class Solution79 {
+class Solution79
+{
     /*
      */
-   public:
-    struct Point {
+  public:
+    struct Point
+    {
         int x;
         int y;
     };
     vector<int> direction = {-1, 0, 1, 0, -1};
 
-   public:
+  public:
     bool dfs(vector<vector<char>>& board, string word, Point cur, int k) {
         if (k == word.size()) {
             return true;
@@ -187,9 +193,10 @@ class Solution79 {
     }
 };
 
-class Solution752 {
+class Solution752
+{
     // BSF 广度优先搜索
-   public:
+  public:
     int openLock(vector<string>& deadends, string target) {
         unordered_set<string> deadNum, visit;
         queue<pair<string, int>> strQ;
@@ -236,10 +243,13 @@ class Solution752 {
     }
 };
 
-int Add(int a, int b) { return a + b; }
+int Add(int a, int b) {
+    return a + b;
+}
 
-class Solution815 {  // 815. 公交路线
-   public:
+class Solution815
+{  // 815. 公交路线
+  public:
     bool IsFriends(vector<int> route1, vector<int> route2) {
         set<int> s1(route1.begin(), route1.end());
         set<int> s2(route2.begin(), route2.end());
@@ -286,8 +296,8 @@ class Solution815 {  // 815. 公交路线
         }
         return -1;
     }
-    int numBusesToDestination(vector<vector<int>>& routes, int source,
-                              int target) {
+    int
+    numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         if (source == target) {
             return 0;
         }
@@ -317,10 +327,11 @@ class Solution815 {  // 815. 公交路线
     }
 };
 
-class Solution8151 {
-   public:
-    int numBusesToDestination(vector<vector<int>>& routes, int source,
-                              int target) {
+class Solution8151
+{
+  public:
+    int
+    numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         if (source == target) {
             return 0;
         }
@@ -364,8 +375,9 @@ class Solution8151 {
     }
 };
 
-class Solution168 {  // 168. Excel表列名称
-   public:
+class Solution168
+{  // 168. Excel表列名称
+  public:
     string convertToTitle(int columnNumber) {
         vector<int> vec;
         string result;
@@ -388,8 +400,9 @@ class Solution168 {  // 168. Excel表列名称
     }
 };
 
-class Solution451 {  // 451. 根据字符出现频率排序
-   public:
+class Solution451
+{  // 451. 根据字符出现频率排序
+  public:
     static bool compare(const pair<char, int>& p1, const pair<char, int>& p2) {
         return p1.second > p2.second;
     }
@@ -410,27 +423,28 @@ class Solution451 {  // 451. 根据字符出现频率排序
     }
 };
 
-class Solution416 {  // 416. 分割等和子集
-                     /*
-                                    * 1.长度小于2，或者和为奇数，或者最大值大于
-                        和的一半，返回false
-                                    * 2.dp[i][j]表示选取若干个(i <
-                                      nums.size())数，和为j，true代表存在，false代表不存在
-                                    * 3.dp[i][0] = true;表示只要不选取元素，j必然为0，存在此情况
-                                    * 4.dp[0][nums[0]] = true; 选取第一个就行
-                                    * 5.对于任意的dp[i][j],分情况讨论,
-                                        当 j >= nums[i]时，
-                                            选取 nums[i],则
-                                                dp[i][j] = dp[i - 1][j - nums[i]];
-                                            不选取 nums[i],则
-                                                dp[i][j] = dp[i - 1][j];
-                                        当 j < nums[i]时，肯定不能选 nums[i],
-                                            dp[i][j] = dp[i - 1][j];
-                                        状态转移方程为：
-                                            dp[i][j] = dp[i - 1][j] | dp[i - 1][j - nums[i]] , j
-                        >=                  nums[i]; = dp[i - 1][j] , j < nums[i]
-                                    */
-   public:
+class Solution416
+{   // 416. 分割等和子集
+    /*
+                   * 1.长度小于2，或者和为奇数，或者最大值大于
+       和的一半，返回false
+                   * 2.dp[i][j]表示选取若干个(i <
+                     nums.size())数，和为j，true代表存在，false代表不存在
+                   * 3.dp[i][0] = true;表示只要不选取元素，j必然为0，存在此情况
+                   * 4.dp[0][nums[0]] = true; 选取第一个就行
+                   * 5.对于任意的dp[i][j],分情况讨论,
+                       当 j >= nums[i]时，
+                           选取 nums[i],则
+                               dp[i][j] = dp[i - 1][j - nums[i]];
+                           不选取 nums[i],则
+                               dp[i][j] = dp[i - 1][j];
+                       当 j < nums[i]时，肯定不能选 nums[i],
+                           dp[i][j] = dp[i - 1][j];
+                       状态转移方程为：
+                           dp[i][j] = dp[i - 1][j] | dp[i - 1][j - nums[i]] , j
+       >=                  nums[i]; = dp[i - 1][j] , j < nums[i]
+                   */
+  public:
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
         int maxValue = *max_element(nums.begin(), nums.end());
@@ -458,8 +472,9 @@ class Solution416 {  // 416. 分割等和子集
     }
 };
 
-class Solution645 {  // 645. 错误的集合
-   public:
+class Solution645
+{  // 645. 错误的集合
+  public:
     vector<int> findErrorNums(vector<int>& nums) {
         int n = nums.size();
         vector<int> vec(n + 1, 0);
@@ -478,13 +493,14 @@ class Solution645 {  // 645. 错误的集合
     }
 };
 
-class Solution1155 {  // 1155. 掷骰子的N种方法
-                      /*
-                                      1. dp[i][j] 表示i个筛子，总数和为j的方法数， i < d, j <
-                         target
-                                      2. dp[i][j] = dp[i - 1][j - n] + 1, n为第i个骰子的点数
-                                      */
-   public:
+class Solution1155
+{   // 1155. 掷骰子的N种方法
+    /*
+                    1. dp[i][j] 表示i个筛子，总数和为j的方法数， i < d, j <
+       target
+                    2. dp[i][j] = dp[i - 1][j - n] + 1, n为第i个骰子的点数
+                    */
+  public:
     int numRollsToTarget(int d, int f, int target) {
         int max = d * f > target ? d * f : target;
         static int MOD = 1000000007;
@@ -505,8 +521,9 @@ class Solution1155 {  // 1155. 掷骰子的N种方法
     }
 };
 
-class Solution23 {  // 23. 合并K个升序链表
-   public:
+class Solution23
+{  // 23. 合并K个升序链表
+  public:
     ListNode* mergeLists(ListNode* l1, ListNode* l2) {
         ListNode *p, *p1, *p2, *result;
         if (l1->val < l2->val) {
@@ -549,8 +566,9 @@ class Solution23 {  // 23. 合并K个升序链表
     }
 };
 
-class Solution726 {  // 726. 原子的数量
-   public:
+class Solution726
+{  // 726. 原子的数量
+  public:
     string countOfAtoms(string formula) {  //通过栈实现 右括号带来的倍乘问题
         vector<pair<string, int>> stk;  //原子以及数量 vector模拟栈
         int size = formula.size();
@@ -584,7 +602,8 @@ class Solution726 {  // 726. 原子的数量
                     i++;
                     num += formula[i] - '0';
                 }
-                if (num == 0) num = 1;  //仅仅是个括号，没有翻倍
+                if (num == 0)
+                    num = 1;  //仅仅是个括号，没有翻倍
                 while (--tempIndex && stk[tempIndex].first != "(") {
                     stk[tempIndex].second *= num;  //翻倍
                 }
@@ -610,8 +629,9 @@ class Solution726 {  // 726. 原子的数量
     }
 };
 
-class Solution151 {  // 151. 翻转字符串里的单词
-   public:
+class Solution151
+{  // 151. 翻转字符串里的单词
+  public:
     string reverseWords(string s) {
         string result;
         // 先去多余空格
@@ -639,9 +659,11 @@ class Solution151 {  // 151. 翻转字符串里的单词
     }
 };
 
-class Solution1418 {  // 1418. 点菜展示表
-   public:
-    struct strCmp {
+class Solution1418
+{  // 1418. 点菜展示表
+  public:
+    struct strCmp
+    {
         bool operator()(const string& s1, const string& s2) const {
             if (atoi(s1.c_str()) < atoi(s2.c_str())) {
                 return true;
@@ -684,8 +706,9 @@ class Solution1418 {  // 1418. 点菜展示表
     }
 };
 
-class Solution509 {  // 509. 斐波那契数
-   public:
+class Solution509
+{  // 509. 斐波那契数
+  public:
     int fib(int n) {
         vector<int> dp(n + 2, 0);
         dp[0] = 0;
@@ -697,9 +720,10 @@ class Solution509 {  // 509. 斐波那契数
     }
 };
 
-class Solution509_1 {  // 509. 斐波那契数
-                       // 空间优化版本，只与前两个数相关
-   public:
+class Solution509_1
+{  // 509. 斐波那契数
+   // 空间优化版本，只与前两个数相关
+  public:
     int fib(int n) {
         if (n < 2) {
             return n;
@@ -713,9 +737,10 @@ class Solution509_1 {  // 509. 斐波那契数
     }
 };
 
-class Solution1137 {  // 1137. 第 N 个泰波那契数
-                      // 空间优化版本，只与前三个数相关
-   public:
+class Solution1137
+{  // 1137. 第 N 个泰波那契数
+   // 空间优化版本，只与前三个数相关
+  public:
     int fib(int n) {
         if (n < 3) {
             return n == 0 ? 0 : 1;
@@ -730,8 +755,9 @@ class Solution1137 {  // 1137. 第 N 个泰波那契数
     }
 };
 
-class Solution1171 {  // 1711. 大餐计数
-   public:
+class Solution1171
+{  // 1711. 大餐计数
+  public:
     int countPairs(vector<int>& deliciousness) {
         int n = deliciousness.size();
         int max = *max_element(deliciousness.begin(), deliciousness.end());
@@ -757,15 +783,17 @@ class Solution1171 {  // 1711. 大餐计数
     }
 };
 
-class Solution605 {  // 605. 种花问题
-   public:
+class Solution605
+{  // 605. 种花问题
+  public:
     bool canPlaceFlowers(vector<int>& flowerbed, int n) {
         int len = flowerbed.size();
         for (int i = 0; i < len; i++) {
             if (flowerbed[i] == 0 && (i == 0 || flowerbed[i - 1] == 0) &&
                 (i == len - 1 || flowerbed[i + 1] == 0)) {
                 n--;
-                if (n <= 0) return true;
+                if (n <= 0)
+                    return true;
                 flowerbed[i] = 1;
             }
         }
@@ -774,8 +802,9 @@ class Solution605 {  // 605. 种花问题
     }
 };
 
-class Solution452 {  // 452. 用最少数量的箭引爆气球
-   public:
+class Solution452
+{  // 452. 用最少数量的箭引爆气球
+  public:
     int findMinArrowShots(vector<vector<int>>& points) {
         // 先按照右边界从小到大排序，第一只箭 第一个右边界
         // 设置为pos，射出，然后扫描挨个扫描，如果左边界小于pos，则可以当前的箭可以覆盖，
@@ -799,8 +828,9 @@ class Solution452 {  // 452. 用最少数量的箭引爆气球
     }
 };
 
-class Solution930 {  // 930. 和相同的二元子数组
-   public:
+class Solution930
+{  // 930. 和相同的二元子数组
+  public:
     int numSubarraysWithSum(vector<int>& nums, int goal) {
         int sum = 0;
         unordered_map<int, int> cnt;
@@ -814,8 +844,9 @@ class Solution930 {  // 930. 和相同的二元子数组
     }
 };
 
-class Solution17_10 {  // 面试题 17.10. 主要元素
-   public:
+class Solution17_10
+{  // 面试题 17.10. 主要元素
+  public:
     int majorityElement(vector<int>& nums) {
         int candidate = -1;
         int count = 0;
@@ -839,15 +870,16 @@ class Solution17_10 {  // 面试题 17.10. 主要元素
     }
 };
 
-class Solution763 {  // 763. 划分字母区间
-                     /*
-                                    * 贪心算法，
-                                      由于同一个字母只能出现在同一个区间，因此需要遍历得到每一个字母最后出现的位置
-                                    * 然后遍历，start 和end标记当前区间，
-                        当访问到元素c时，重新计算end = max（end, endc),当 i =
-                        end的时候，此时当前区间结束                   start = end + 1；
-                                    */
-   public:
+class Solution763
+{   // 763. 划分字母区间
+    /*
+                   * 贪心算法，
+                     由于同一个字母只能出现在同一个区间，因此需要遍历得到每一个字母最后出现的位置
+                   * 然后遍历，start 和end标记当前区间，
+       当访问到元素c时，重新计算end = max（end, endc),当 i =
+       end的时候，此时当前区间结束                   start = end + 1；
+                   */
+  public:
     vector<int> partitionLabels(string s) {
         vector<int> last(26, 0);
         vector<int> result;
@@ -867,12 +899,13 @@ class Solution763 {  // 763. 划分字母区间
     }
 };
 
-class Solution406 {  // 406. 根据身高重建队列、
-                     /*
-                                    1.先根据身高进行排序
-                                    2.如果身高最低的不是排在第一位，则根据他的排序，放到 第i位
-                                    */
-   public:
+class Solution406
+{   // 406. 根据身高重建队列、
+    /*
+                   1.先根据身高进行排序
+                   2.如果身高最低的不是排在第一位，则根据他的排序，放到 第i位
+                   */
+  public:
     vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
         sort(people.begin(), people.end(),
              [](const vector<int>& u, const vector<int>& v) {
@@ -896,8 +929,9 @@ class Solution406 {  // 406. 根据身高重建队列、
     }
 };
 
-class TimeMap {  // 981. 基于时间的键值存储
-   public:
+class TimeMap
+{  // 981. 基于时间的键值存储
+  public:
     /** Initialize your data structure here. */
     TimeMap() {}
 
@@ -925,12 +959,13 @@ class TimeMap {  // 981. 基于时间的键值存储
         return timeMap[key][timestamp];
     }
 
-   private:
+  private:
     map<string, map<int, string>> timeMap;
 };
 
-class Solution665 {  // 665. 非递减数列
-   public:
+class Solution665
+{  // 665. 非递减数列
+  public:
     bool checkPossibility(vector<int>& nums) {
         int count = 0;
         int n = nums.size();
@@ -949,8 +984,9 @@ class Solution665 {  // 665. 非递减数列
     }
 };
 
-class Solution274 {  // 274. H 指数
-   public:
+class Solution274
+{  // 274. H 指数
+  public:
     int hIndex(vector<int>& citations) {
         int n = citations.size();
         sort(citations.begin(), citations.end());
@@ -963,8 +999,9 @@ class Solution274 {  // 274. H 指数
     }
 };
 
-class Solution274_1 {  // 274. H 指数2
-   public:
+class Solution274_1
+{  // 274. H 指数2
+  public:
     int hIndex(vector<int>& citations) {
         int n = citations.size();
         sort(citations.begin(), citations.end());
@@ -986,7 +1023,7 @@ class Solution274_1 {  // 274. H 指数2
 
 class CxString  // 没有使用explicit关键字的类声明, 即默认为隐式声明
 {
-   public:
+  public:
     char* _pstr;
     int _size;
     CxString(int size) {
@@ -1002,8 +1039,9 @@ class CxString  // 没有使用explicit关键字的类声明, 即默认为隐式
     }
 };
 
-class Sort {
-   public:
+class Sort
+{
+  public:
     void BubbleSort(vector<int>& vec) {
         // 每一轮都把最大的元素移到最右边
         int n = vec.size();
@@ -1037,8 +1075,9 @@ char* getMemory(void) {
     return p;
 }
 
-class Solution_Offer53 {
-   public:
+class Solution_Offer53
+{
+  public:
     int search(vector<int>& nums, int target) {
         int n = nums.size();
         int left = 0, right = n - 1, mid;
@@ -1076,9 +1115,10 @@ class Solution_Offer53 {
     }
 };
 
-class Solution_Offer42 {  // 剑指 Offer 42. 连续子数组的最大和
-                          // dp[i] 表示以第i个元素为结尾的最大和
-   public:
+class Solution_Offer42
+{  // 剑指 Offer 42. 连续子数组的最大和
+   // dp[i] 表示以第i个元素为结尾的最大和
+  public:
     int maxSubArray(vector<int>& nums) {
         int result = 0;
         int n = nums.size();
@@ -1093,9 +1133,10 @@ class Solution_Offer42 {  // 剑指 Offer 42. 连续子数组的最大和
     }
 };
 
-class Solution_Offer1002 {  // 面试题 10.02. 变位词组
-                            // 存在不同的字母组合值相同的情况，需要处理hash碰撞
-   public:
+class Solution_Offer1002
+{  // 面试题 10.02. 变位词组
+   // 存在不同的字母组合值相同的情况，需要处理hash碰撞
+  public:
     int calcSum(string str) {
         int sum = 0;
         for (auto& c : str) {
@@ -1118,8 +1159,9 @@ class Solution_Offer1002 {  // 面试题 10.02. 变位词组
     }
 };
 
-class Solution1838 {  // 1838. 最高频元素的频数
-   public:
+class Solution1838
+{  // 1838. 最高频元素的频数
+  public:
     int maxFrequency(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
         int n = nums.size();
@@ -1137,8 +1179,9 @@ class Solution1838 {  // 1838. 最高频元素的频数
     }
 };
 
-class Solution1784 {  // 1784. 检查二进制字符串字段
-   public:
+class Solution1784
+{  // 1784. 检查二进制字符串字段
+  public:
     bool checkOnesSegment(string s) {
         bool hasOne = false, hasZero = false;
         for (int i = 0; i < s.size(); ++i) {
@@ -1154,8 +1197,9 @@ class Solution1784 {  // 1784. 检查二进制字符串字段
     }
 };
 
-class Solution1736 {  // 1736. 替换隐藏数字得到的最晚时间
-   public:
+class Solution1736
+{  // 1736. 替换隐藏数字得到的最晚时间
+  public:
     string maximumTime(string time) {
         string res;
         for (int i = 0; i < 5; ++i) {
@@ -1185,7 +1229,8 @@ class Solution1736 {  // 1736. 替换隐藏数字得到的最晚时间
     }
 };
 void* my_memcpy_byte(void* dst, const void* src, int n) {
-    if (dst == NULL || src == NULL || n <= 0) return NULL;
+    if (dst == NULL || src == NULL || n <= 0)
+        return NULL;
 
     char* pdst = (char*)dst;
     char* psrc = (char*)src;
@@ -1193,9 +1238,11 @@ void* my_memcpy_byte(void* dst, const void* src, int n) {
     if (pdst > psrc && pdst < psrc + n) {
         pdst = pdst + n - 1;
         psrc = psrc + n - 1;
-        while (n--) *pdst-- = *psrc--;
+        while (n--)
+            *pdst-- = *psrc--;
     } else {
-        while (n--) *pdst++ = *psrc++;
+        while (n--)
+            *pdst++ = *psrc++;
     }
     return dst;
 }
@@ -1220,7 +1267,8 @@ void* memcpy(void* dest, const void* src, int count) {
     return pdest;
 }
 void* mymemcpy(void* dest, const void* src, size_t count) {
-    if (dest == NULL || src == NULL) return NULL;
+    if (dest == NULL || src == NULL)
+        return NULL;
     char* pdest = static_cast<char*>(dest);
     const char* psrc = static_cast<const char*>(psrc);
     int n = count;
@@ -1238,8 +1286,9 @@ void* mymemcpy(void* dest, const void* src, size_t count) {
     return dest;
 }
 
-class Solution {
-   public:
+class Solution
+{
+  public:
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr) {
             return nullptr;
@@ -1254,13 +1303,15 @@ class Solution {
     }
 };
 
-class Solution1646 {  // 1646. 获取生成数组中的最大值
-   public:
-    int getMaximumGenerated(int n) { }
+class Solution1646
+{  // 1646. 获取生成数组中的最大值
+  public:
+    int getMaximumGenerated(int n) {}
 };
 
-class Solution31 {
-   public:
+class Solution31
+{
+  public:
     void nextPermutation(vector<int>& nums) {
         // 1.从后往前找 a[i] < a[j]的i,这样从j到n就是下降序列
         // 2.然后在 区间[j,n]之间,从后往前找第一个大于a[i]的数,位置记为m,
@@ -1280,15 +1331,16 @@ class Solution31 {
                     std::swap(nums[left], nums[right]);
                     break;
                 }
-            }  
+            }
         }
         std::reverse(nums.begin() + left + 1, nums.end());
     }
 };
 
-class Solution94 {  // 94. 二叉树的中序遍历
-   public:
-    void inorder(TreeNode *root, vector<int> &res) {
+class Solution94
+{  // 94. 二叉树的中序遍历
+  public:
+    void inorder(TreeNode* root, vector<int>& res) {
         if (root == nullptr) {
             return;
         }
@@ -1296,17 +1348,18 @@ class Solution94 {  // 94. 二叉树的中序遍历
         res.push_back(root->val);
         inorder(root->right, res);
     }
-    vector<int> inorderTraversal(TreeNode *root) {
+    vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
         inorder(root, res);
         return res;
     }
 };
 
-class Solution19 {  // 19. 删除链表的倒数第 N 个结点
-    // 双指针，l指向第一个节点，r指向第n个节点，当n指向最后一个节点的时候，r真好指向倒数第n和节点
-   public:
-    ListNode *removeNthFromEnd(ListNode *head, int n) {
+class Solution19
+{  // 19. 删除链表的倒数第 N 个结点
+   // 双指针，l指向第一个节点，r指向第n个节点，当n指向最后一个节点的时候，r真好指向倒数第n和节点
+  public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode *left, *right, *pre;
         left = head;
         right = head;
@@ -1330,11 +1383,12 @@ class Solution19 {  // 19. 删除链表的倒数第 N 个结点
     }
 };
 
-class Solution22 {  // 22. 括号生成
-   private:
+class Solution22
+{  // 22. 括号生成
+  private:
     vector<string> res;
 
-   public:
+  public:
     vector<string> generateParenthesis(int n) {
         if (n <= 0) {
             return res;
@@ -1360,9 +1414,10 @@ class Solution22 {  // 22. 括号生成
         }
     }
 };
-class Solution33 {  // 33. 搜索旋转排序数组
-   public:
-    int binarySearch(vector<int> &nums, int left, int right, int target) {
+class Solution33
+{  // 33. 搜索旋转排序数组
+  public:
+    int binarySearch(vector<int>& nums, int left, int right, int target) {
         int mid;
         while (left <= right) {
             mid = (left + right) / 2;
@@ -1376,7 +1431,7 @@ class Solution33 {  // 33. 搜索旋转排序数组
         }
         return -1;
     }
-    int search(vector<int> &nums, int target) {
+    int search(vector<int>& nums, int target) {
         int seg = 0, pre = nums[0];
         int leftArea, rightArea;
         for (int i = 1; i < nums.size(); ++i) {
@@ -1397,10 +1452,14 @@ class Solution33 {  // 33. 搜索旋转排序数组
     }
 };
 
-class Solution39 {  // 39. 组合总和
-   public:
-    void dfs(vector<int> &candidates, int target, vector<vector<int>> &ans,
-             vector<int> &combine, int idx) {
+class Solution39
+{  // 39. 组合总和
+  public:
+    void dfs(vector<int>& candidates,
+             int target,
+             vector<vector<int>>& ans,
+             vector<int>& combine,
+             int idx) {
         if (idx == candidates.size()) {
             return;
         }
@@ -1418,16 +1477,17 @@ class Solution39 {  // 39. 组合总和
         }
     }
 
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;
         vector<int> combine;
         dfs(candidates, target, ans, combine, 0);
         return ans;
     }
 };
-class Solution39_1 {
-   public:
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+class Solution39_1
+{
+  public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ret;
         vector<int> now;
         int sum = 0, n = candidates.size();
@@ -1451,8 +1511,9 @@ class Solution39_1 {
     }
 };
 
-class MinStack {
-   public:
+class MinStack
+{
+  public:
     /** initialize your data structure here. */
     MinStack() {}
 
@@ -1476,11 +1537,15 @@ class MinStack {
         topIdx--;
     }
 
-    int top() { return stack[--topIdx]; }
+    int top() {
+        return stack[--topIdx];
+    }
 
-    int getMin() { return min; }
+    int getMin() {
+        return min;
+    }
 
-   private:
+  private:
     int stack[100];
     int max = INT_MIN;
     int min = INT_MAX;
@@ -1488,11 +1553,12 @@ class MinStack {
     int bottom = 0;
 };
 
-class Solution {
-   public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *pa = headA;
-        ListNode *pb = headB;
+class Solution
+{
+  public:
+    ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+        ListNode* pa = headA;
+        ListNode* pb = headB;
         while (pa != nullptr) {
             while (pb != nullptr) {
                 if (pa == pb) {
@@ -1506,12 +1572,13 @@ class Solution {
     }
 };
 
-class Solution56 {  // 56. 合并区间
-   public:
-    vector<vector<int>> merge(vector<vector<int>> &intervals) {
+class Solution56
+{  // 56. 合并区间
+  public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
         vector<vector<int>> res;
         sort(intervals.begin(), intervals.end(),
-             [](const vector<int> &a, vector<int> &b) { return a[0] < b[0]; });
+             [](const vector<int>& a, vector<int>& b) { return a[0] < b[0]; });
         int left = intervals[0][0];
         for (int i = 1; i < intervals.size(); ++i) {
             while (i < intervals.size() &&
@@ -1527,24 +1594,27 @@ class Solution56 {  // 56. 合并区间
     }
 };
 
-class Solution987 {  // 987. 二叉树的垂序遍历
-    // 先层序遍历
-   public:
-    struct Tnode {
+class Solution987
+{  // 987. 二叉树的垂序遍历
+   // 先层序遍历
+  public:
+    struct Tnode
+    {
         int row;
         int col;
-        TreeNode *node;
-        Tnode(int row, int col, TreeNode *node)
+        TreeNode* node;
+        Tnode(int row, int col, TreeNode* node)
             : row(row), col(col), node(node){};
     };
 
-    struct Point {
+    struct Point
+    {
         int row;
         int val;
         Point(int row, int val) : row(row), val(val){};
     };
 
-    vector<vector<int>> verticalTraversal(TreeNode *root) {
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
         queue<Tnode> tQueue;
         map<int, vector<Point>> tMap;
         tQueue.push(Tnode(0, 0, root));
@@ -1563,15 +1633,15 @@ class Solution987 {  // 987. 二叉树的垂序遍历
             }
         }
         for (auto it = tMap.begin(); it != tMap.end(); ++it) {
-            vector<Point> &vec = it->second;
+            vector<Point>& vec = it->second;
             vector<int> temp;
-            sort(vec.begin(), vec.end(), [](const Point &p1, const Point &p2) {
+            sort(vec.begin(), vec.end(), [](const Point& p1, const Point& p2) {
                 if (p1.row == p2.row) {
                     return p1.val < p2.val;
                 }
                 return p1.row < p2.row;
             });
-            for (auto &i : vec) {
+            for (auto& i : vec) {
                 temp.push_back(i.val);
             }
             res.push_back(temp);
@@ -1580,14 +1650,15 @@ class Solution987 {  // 987. 二叉树的垂序遍历
     }
 };
 
-class Solution987_1 {  // 987. 二叉树的垂序遍历
-    // 前序遍历
-   public:
-    vector<vector<int>> verticalTraversal(TreeNode *root) {
+class Solution987_1
+{  // 987. 二叉树的垂序遍历
+   // 前序遍历
+  public:
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
         vector<tuple<int, int, int>> nodes;  // col ,row, val
         vector<vector<int>> res;
-        function<void(TreeNode *, int, int)> dfs = [&](TreeNode *root, int row,
-                                                       int col) {
+        function<void(TreeNode*, int, int)> dfs = [&](TreeNode* root, int row,
+                                                      int col) {
             if (!root) {
                 return;
             }
@@ -1598,7 +1669,7 @@ class Solution987_1 {  // 987. 二叉树的垂序遍历
         dfs(root, 0, 0);
         sort(nodes.begin(), nodes.end());
         int lastCol = INT_MAX;
-        for (const auto &[col, row, val] : nodes) {
+        for (const auto& [col, row, val] : nodes) {
             if (lastCol != col) {
                 lastCol = col;
                 res.emplace_back();
@@ -1616,9 +1687,10 @@ class Solution987_1 {  // 987. 二叉树的垂序遍历
     }
 };
 
-class Solution1337 {  // 1337. 矩阵中战斗力最弱的 K 行
-   public:
-    vector<int> kWeakestRows(vector<vector<int>> &mat, int k) {
+class Solution1337
+{  // 1337. 矩阵中战斗力最弱的 K 行
+  public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         vector<tuple<int, int>> vec;  // 军人数, 行号
         vector<int> res;
         int row = mat.size();
@@ -1632,16 +1704,19 @@ class Solution1337 {  // 1337. 矩阵中战斗力最弱的 K 行
             vec.emplace_back(sum, i);
         }
         sort(vec.begin(), vec.end());
-        for (const auto &[i, row] : vec) {
+        for (const auto& [i, row] : vec) {
             res.emplace_back(row);
         }
         return res;
     }
 };
 
-class Solution46 {  // 46. 全排列
-   public:
-    void backtrack(vector<vector<int>> &res, vector<int> &output, int first,
+class Solution46
+{  // 46. 全排列
+  public:
+    void backtrack(vector<vector<int>>& res,
+                   vector<int>& output,
+                   int first,
                    int len) {
         // 所有数都填完了
         if (first == len) {
@@ -1657,11 +1732,11 @@ class Solution46 {  // 46. 全排列
             swap(output[i], output[first]);
         }
     }
-    vector<vector<int>> permute(vector<int> &nums) {
+    vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> res;
         int len = nums.size();
         function<void(vector<int> & output, int first)> backtrack =
-            [&](vector<int> &output, int first) {
+            [&](vector<int>& output, int first) {
                 if (first == len) {
                     res.emplace_back(output);
                     return;
@@ -1674,21 +1749,22 @@ class Solution46 {  // 46. 全排列
                     // 撤销操作
                     swap(output[i], output[first]);
                 }
-            }; 
+            };
         backtrack(nums, 0);
         return res;
     }
 };
 
-class Solution581 { // 581. 最短无序连续子数组
-public:
+class Solution581
+{  // 581. 最短无序连续子数组
+  public:
     int findUnsortedSubarray(vector<int>& nums) {
         int maxn = INT_MIN;
         int minn = INT_MAX;
         int left = -1, right = -1;
         int n = nums.size();
         for (int i = 0; i < n; ++i) {
-            if (maxn > nums[i]) { // 乱序位置
+            if (maxn > nums[i]) {  // 乱序位置
                 right = i;
             } else {
                 maxn = nums[i];
@@ -1698,14 +1774,14 @@ public:
             } else {
                 minn = nums[n - i - 1];
             }
-
         }
         return left == -1 ? 0 : right - left + 1;
     }
 };
 
-class Solution169 { // 169. 多数元素
-public:
+class Solution169
+{  // 169. 多数元素
+  public:
     int majorityElement(vector<int>& nums) {
         int major = nums[0];
         int count = 1;
@@ -1713,7 +1789,6 @@ public:
         for (int i = 1; i < n; ++i) {
             if (count == 0) {
                 major = nums[i];
-
             }
             if (major == nums[i]) {
                 count++;
@@ -1722,7 +1797,7 @@ public:
             }
         }
         count = 0;
-        for (const auto &i : nums) {
+        for (const auto& i : nums) {
             if (major == i) {
                 count++;
             }
@@ -1731,30 +1806,55 @@ public:
     }
 };
 
-class Solution226 { // 226. 翻转二叉树
-public:
+class Solution226
+{  // 226. 翻转二叉树
+  public:
     void invert(TreeNode* root) {
         if (!root) {
             return;
         }
         invert(root->left);
-        TreeNode *temp = root->left;
+        TreeNode* temp = root->left;
         root->left = root->right;
         root->right = temp;
         invert(root->right);
         return;
     }
     TreeNode* invertTree(TreeNode* root) {
-        if(!root) {
+        if (!root) {
             return nullptr;
         }
         invert(root->left);
         return root;
     }
 };
-int main() {
-    Solution226 so;
-    TreeNode *root = CreatTree({1, 2, 3});
-    so.invert(root);
-    return 0;
-}
+
+/*
+** 题目链接:https://leetcode.cn/problems/trapping-rain-water/
+** 题目简述:42. 接雨水
+** 题目分类:双指针
+** 解题思路:每个点能储存的雨水取决于其左右两边的最大值的最小值,注意可能为负数进行补偿
+** 反思收获:
+*/
+
+class Solution42
+{
+  public:
+    int trap(vector<int>& height) {
+        int left = 0, right = height.size() - 1;
+        int leftMax = 0, rightMax = 0;
+        int ans = 0;
+        while (left < right) {
+            leftMax = max(leftMax, height[left]);
+            rightMax = max(rightMax, height[right]);
+            if (leftMax < rightMax) {
+                ans += leftMax - height[left];
+                left++;
+            } else {
+                ans += rightMax - height[right];
+                right--;
+            }
+        }
+        return ans;
+    }
+};
