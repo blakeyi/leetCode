@@ -1,42 +1,30 @@
-#include <bits/stdc++.h>
+#include "common.h"
 using namespace std;
 
 /*
-** 题目链接:https://leetcode.cn/problems/trapping-rain-water/
-** 题目简述:42. 接雨水
-** 题目分类:双指针
-** 解题思路:每个点能储存的雨水取决于其左右两边的最大值的最小值,注意可能为负数进行补偿
+** 题目链接:https://leetcode.cn/problems/merge-two-binary-trees/
+** 题目简述:617. 合并二叉树
+** 题目分类:深度优先
 ** 反思收获:
 */
 
-class Solution42
+class Solution461
 {
   public:
-    int trap(vector<int>& height) {
-        int left = 0, right = height.size() - 1;
-        int leftMax = 0, rightMax = 0;
-        int ans = 0;
-        while (left < right) {
-            leftMax = max(leftMax, height[left]);
-            rightMax = max(rightMax, height[right]);
-            if (leftMax < rightMax) {
-                ans += leftMax - height[left];
-                left++;
-            } else {
-                ans += rightMax - height[right];
-                right--;
-            }
+    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if (root1 == nullptr) {
+            return root2;
         }
-        return ans;
+        if (root2 == nullptr) {
+            return root1;
+        }
+        TreeNode* merged = new TreeNode(root1->val + root2->val);
+        merged->left = mergeTrees(root1->left, root2->left);
+        merged->right = mergeTrees(root1->right, root2->right);
+        return merged;
     }
 };
 
 int main() {
-    Solution42 so;
-    vector<int> nums = {4, 2, 0, 3, 2, 5};
-    bool a = true;
-    printf("%d", a);
-    so.trap(nums);
-
     return 0;
 }

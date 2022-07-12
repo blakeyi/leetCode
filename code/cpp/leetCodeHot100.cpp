@@ -1,74 +1,7 @@
-#include <bits/stdc++.h>
+#include "common.h"
+#include <unordered_set>
+
 using namespace std;
-
-struct TreeNode
-{
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode* left, TreeNode* right)
-        : val(x), left(left), right(right) {}
-};
-
-struct ListNode
-{
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
-};
-
-// 层序遍历建树
-/*
-        1
-     2     3
-   nl nl  nl nl
-nl 用INT_MAX代替
-*/
-TreeNode* CreatTree(vector<int> nums) {
-    TreeNode* root = new TreeNode(nums[0]);
-    queue<TreeNode*> tQueue;
-    tQueue.push(root);
-    int n = nums.size(), i = 1;
-    while (!tQueue.empty() && i < n) {
-        TreeNode* p = tQueue.front();
-        TreeNode *left, *right;
-        tQueue.pop();
-        if (nums[i] != INT_MAX) {
-            left = new TreeNode(nums[i]);
-        } else {
-            left = nullptr;
-        }
-        i++;
-        if (nums[i] != INT_MAX) {
-            right = new TreeNode(nums[i]);
-        } else {
-            right = nullptr;
-        }
-        i++;
-        if (p) {
-            p->left = left;
-            p->right = right;
-            tQueue.push(left);
-            tQueue.push(right);
-        }
-    }
-    return root;
-}
-
-ListNode* CreatList(vector<int> nums) {
-    ListNode* head = new ListNode(nums[0]);
-    ListNode* phead = head;
-    for (int i = 1; i < nums.size(); ++i) {
-        ListNode* node = new ListNode(nums[i]);
-        phead->next = node;
-        phead = node;
-    }
-    return head;
-}
 
 class Solution695
 {  // 695. 岛屿的最大面积
@@ -105,6 +38,31 @@ class Solution695
         return maxArea;
     }
 };
+
+/*
+** 题目链接:https://leetcode.cn/problems/merge-two-binary-trees/
+** 题目简述:617. 合并二叉树
+** 题目分类:深度优先
+** 反思收获:
+*/
+
+class Solution461
+{
+  public:
+    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if (root1 == nullptr) {
+            return root2;
+        }
+        if (root2 == nullptr) {
+            return root1;
+        }
+        TreeNode* merged = new TreeNode(root1->val + root2->val);
+        merged->left = mergeTrees(root1->left, root2->left);
+        merged->right = mergeTrees(root1->right, root2->right);
+        return merged;
+    }
+};
+
 class Solution77
 {
     /*
@@ -324,6 +282,39 @@ class Solution815
             }
         }
         return result.size() != 0 ? *result.begin() : -1;
+    }
+};
+
+/*
+** 题目链接:https://leetcode.cn/problems/hamming-distance/
+** 题目简述:461. 汉明距离
+** 题目分类:位运算
+** 方法1:直接通过位计算, 计算每一位的值是不是相等
+** 方法2:利用x&(x-1)是把x的最右边的1去掉的特性,计算x异或y之后的1的位数
+** 反思收获:
+*/
+
+class Solution461
+{
+  public:
+    int hammingDistance(int x, int y) {
+        int maxNum = max(x, y);
+        int count = 0;
+        for (int64_t i = 1; i <= maxNum; i = i * 2) {
+            if ((i & x) != (i & y)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    int hammingDistance1(int x, int y) {
+        int ret = x ^ y;
+        int count = 0;
+        while (ret > 0) {
+            ret = ret & (ret - 1);
+            count++;
+        }
+        return count;
     }
 };
 
