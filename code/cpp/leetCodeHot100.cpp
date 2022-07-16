@@ -144,6 +144,76 @@ class Solution77
         return ans;
     }
 };
+
+/*
+** 题目链接:https://leetcode.cn/problems/subsets/
+** 题目简述:78. 子集
+** 题目分类:dp
+** 反思收获:
+*/
+
+class Solution78
+{
+  public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        ans.push_back(vector<int>());
+        for (size_t i = 0; i < nums.size(); i++) {
+            int len = ans.size();
+            for (size_t j = 0; j < len; j++) {
+                vector<int> temp = ans[j];
+                temp.push_back(nums[i]);
+                ans.push_back(temp);
+            }
+        }
+        return ans;
+    }
+};
+
+/*
+** 题目链接:https://leetcode.cn/problems/group-anagrams/
+** 题目简述:49. 字母异位词分组
+** 题目分类:hash,关键是找到唯一的hash key
+** 反思收获:
+*/
+
+class Solution49
+{
+  public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        /* 根据返回值定义存储结果的变量 */
+        vector<vector<string>> result;
+
+        unordered_map<string, vector<string>> map;
+        for (string& str : strs) {
+            string key = str;
+            /* 计数作为键 */
+            string hashKey;
+            vector<bool> bitFlags(26, false);
+            for (size_t i = 0; i < str.length(); i++) {
+                bitFlags[str[i] - 'a'] = true;
+            }
+            for (size_t i = 0; i < 26; i++) {
+                if (bitFlags[i]) {
+                    hashKey += to_string(i);
+                }
+            }
+
+            /* 将串排序后便于同一作为键 */
+            // sort(key.begin(), key.end());
+            // hashKey = key
+
+            /* 将相同键值的字符串放入vector容器中 */
+            map[hashKey].push_back(str);  // emplace_back
+        }
+        /* 取出相同键值的vector */
+        for (auto it = map.begin(); it != map.end(); ++it)
+            result.push_back(it->second);
+
+        return result;
+    }
+};
+
 class Solution79
 {
     /*

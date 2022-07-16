@@ -2,56 +2,39 @@
 using namespace std;
 
 /*
-** 题目链接:https://leetcode.cn/problems/rotate-image/
-** 题目简述:48. 旋转图像
-** 题目分类:顺时针旋转90度即先左对角线对称,然后左右对称
+** 题目链接:https://leetcode.cn/problems/subsets/
+** 题目简述:78. 子集
+** 题目分类:dp
 ** 反思收获:
 */
 
-class Solution461
+class Solution78
 {
   public:
-    void rotate(vector<vector<int>>& matrix) {
-        symmetryDiaLeft(matrix);
-        symmetryCenterLeft(matrix);
-    }
-
-    // 按照左对角线对称
-    void symmetryDiaLeft(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        for (size_t i = 0; i < n; i++) {
-            for (size_t j = i; j < n; j++) {
-                swap(matrix[i][j], matrix[j][i]);
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        ans.push_back(vector<int>());
+        for (size_t i = 0; i < nums.size(); i++) {
+            int len = ans.size();
+            for (size_t j = 0; j < len; j++) {
+                vector<int> temp = ans[j];
+                temp.push_back(nums[i]);
+                ans.push_back(temp);
             }
         }
-    }
-
-    // 按照右对角线对称-暂时未实现
-    void symmetryDiaRight(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-    }
-
-    // 按照左右对称
-    void symmetryCenterLeft(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        for (size_t i = 0; i < n; i++) {
-            for (size_t j = 0; j < n / 2; j++) {
-                swap(matrix[i][j], matrix[i][n - j - 1]);
-            }
-        }
-    }
-
-    // 按照上下对称
-    void symmetryCenterTop(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        for (size_t i = 0; i < n / 2; i++) {
-            for (size_t j = 0; j < n; j++) {
-                swap(matrix[i][j], matrix[n - i - 1][j]);
-            }
-        }
+        return ans;
     }
 };
 
 int main() {
+    Solution78 so;
+    vector<int> input = {1, 3, 5};
+
+    // vector<vector<int>> ans = {{1}, {1, 3, 5}, {5}};
+    // for (auto i : ans) {
+    //     cout << i.size();
+    // }
+
+    so.subsets(input);
     return 0;
 }
