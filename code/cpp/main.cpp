@@ -2,39 +2,47 @@
 using namespace std;
 
 /*
-** 题目链接:https://leetcode.cn/problems/subsets/
-** 题目简述:78. 子集
-** 题目分类:dp
+** 题目链接:https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
+** 题目简述:114. 二叉树展开为链表
+** 题目分类:链表和二叉树
 ** 反思收获:
 */
 
-class Solution78
+class Solution114
 {
   public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        ans.push_back(vector<int>());
-        for (size_t i = 0; i < nums.size(); i++) {
-            int len = ans.size();
-            for (size_t j = 0; j < len; j++) {
-                vector<int> temp = ans[j];
-                temp.push_back(nums[i]);
-                ans.push_back(temp);
-            }
+    void flatten(TreeNode* root) {
+        vector<TreeNode*> list;
+        preOrder(root, list);
+        if (list.size() <= 1) {
+            return;
         }
-        return ans;
+        for (size_t i = 0; i < list.size() - 1; i++) {
+            list[i]->left = nullptr;
+            list[i]->right = list[i + 1];
+        }
+        return;
+    }
+    void preOrder(TreeNode* root, vector<TreeNode*>& list) {
+        if (root == nullptr) {
+            return;
+        }
+        list.push_back(root);
+        preOrder(root->left, list);
+        preOrder(root->right, list);
     }
 };
 
 int main() {
-    Solution78 so;
-    vector<int> input = {1, 3, 5};
+    Solution114 so;
+    vector<int> input = {1, 3, 5, INT_MAX, INT_MAX, INT_MAX, INT_MAX};
 
     // vector<vector<int>> ans = {{1}, {1, 3, 5}, {5}};
     // for (auto i : ans) {
     //     cout << i.size();
     // }
 
-    so.subsets(input);
+    TreeNode* root = CreatTree(input);
+    so.flatten(root);
     return 0;
 }

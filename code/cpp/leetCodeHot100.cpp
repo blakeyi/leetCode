@@ -214,6 +214,67 @@ class Solution49
     }
 };
 
+/*
+** 题目链接:https://leetcode.cn/problems/unique-binary-search-trees/
+** 题目简述:96. 不同的二叉搜索树
+** 题目分类:dp
+** 反思收获:利用二叉搜索树的特性(左子树的值都比根节点小,右节点的值都比根节点大),可以分解为子问题
+** G(n)表示长度为n的序列的二叉搜索树的个数,
+** F(i, n)表示以i为根节点,长度为n的二叉搜索树的个数, F(i, n) = G(i - 1) * G(n -
+*i), 注意到 G(n)G(n) 和序列的内容无关，只和序列的长度有关
+** 故 G(n) = F(1, n) + F(2, n) + ... + F(i, n),  1 <= i <= n;
+** 故 G(n) = G(i - 1) * G(n - i),  1 <= i <= n;
+*/
+
+class Solution96
+{
+  public:
+    int numTrees(int n) {
+        vector<int> G(n + 1, 0);
+        G[0] = 1;
+        G[1] = 1;
+
+        for (int i = 2; i <= n; ++i) {
+            for (int j = 1; j <= i; ++j) {
+                G[i] += G[j - 1] * G[i - j];
+            }
+        }
+        return G[n];
+    }
+};
+
+/*
+** 题目链接:https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
+** 题目简述:114. 二叉树展开为链表
+** 题目分类:链表和二叉树
+** 反思收获:
+*/
+
+class Solution114
+{
+  public:
+    void flatten(TreeNode* root) {
+        vector<TreeNode*> list;
+        preOrder(root, list);
+        if (list.size() <= 1) {
+            return;
+        }
+        for (size_t i = 0; i < list.size() - 1; i++) {
+            list[i]->left = nullptr;
+            list[i]->right = list[i + 1];
+        }
+        return;
+    }
+    void preOrder(TreeNode* root, vector<TreeNode*>& list) {
+        if (root == nullptr) {
+            return;
+        }
+        list.push_back(root);
+        preOrder(root->left, list);
+        preOrder(root->right, list);
+    }
+};
+
 class Solution79
 {
     /*
